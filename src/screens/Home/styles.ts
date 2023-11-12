@@ -9,7 +9,7 @@ export const Container = styled.section`
 
 export const ListProducts = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 25px;
   margin: 50px;
 `;
@@ -19,8 +19,14 @@ export const Product = styled.div`
   box-shadow: 0px 2px 8px 0px #00000022;
 `;
 
-export const ImageProduct = styled.img`
-  width: 100%;
+export const ImageProduct = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export const Image = styled.img`
+  width: 130px;
+  height: 130px;
 
   mix-blend-mode: multiply;
 `;
@@ -33,6 +39,8 @@ export const ProductInfo = styled.div`
 
 export const InfoInSameLine = styled.div`
   display: flex;
+
+  margin: 10px 0;
 `;
 
 export const NameProduct = styled.span`
@@ -50,6 +58,14 @@ export const InformationProduct = styled.span`
   line-height: 12px;
 
   margin: 15px 0 10px;
+
+  height: 25px;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const ValueProduct = styled.div`
@@ -57,8 +73,7 @@ export const ValueProduct = styled.div`
   justify-content: center;
   align-items: center;
 
-  width: 60px;
-  height: 40px;
+  padding: 6px 10px;
 
   background-color: ${({ theme }) => theme.COLORS.DARK_GRAY};
   border-radius: 8px;

@@ -3,6 +3,7 @@ import {
   ButtonTitle,
   Container,
   IconButton,
+  Image,
   ImageProduct,
   InfoInSameLine,
   InformationProduct,
@@ -16,35 +17,46 @@ import {
 
 import shoppingIcon from "../../assets/shopping.svg";
 import AsideCart from "../../components/AsideCart";
+import { useQueryGetProducts } from "../../queries/useQueryGetProducts";
+import LoadingComponent from "../../components/LoadingComponent";
+import ErrorComponent from "../../components/ErrorComponent";
 
 function Home() {
+  const { isLoading, isError, data: responseProducts } = useQueryGetProducts();
+
+  if (isLoading) return <LoadingComponent />;
+
+  if (isError) return <ErrorComponent />;
+
   return (
     <Container>
       <ListProducts>
-        <Product>
-          <ImageProduct
-            src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/41-nc-alum-red-sport-band-red-s9?wid=1200&hei=630&fmt=jpeg&qlt=95&.v=1693325468410"
-            alt="image-product"
-          />
+        {responseProducts?.map((currentProduct) => (
+          <Product>
+            <ImageProduct>
+              <Image src={currentProduct.photo} alt="image-product" />
+            </ImageProduct>
 
-          <ProductInfo>
-            <InfoInSameLine>
-              <NameProduct>Apple WatchApple Wa</NameProduct>
-              <ValueProduct>
-                <TextValueProduct>R$399</TextValueProduct>
-              </ValueProduct>
-            </InfoInSameLine>
+            <ProductInfo>
+              <InfoInSameLine>
+                <NameProduct>{currentProduct.name}</NameProduct>
 
-            <InformationProduct>
-              Redesigned from scratch and completely revised.
-            </InformationProduct>
-          </ProductInfo>
+                <ValueProduct>
+                  <TextValueProduct>R${currentProduct.price}</TextValueProduct>
+                </ValueProduct>
+              </InfoInSameLine>
 
-          <ButtonBuy>
-            <IconButton src={shoppingIcon} alt="button-icon" />
-            <ButtonTitle>COMPRAR</ButtonTitle>
-          </ButtonBuy>
-        </Product>
+              <InformationProduct>
+                {currentProduct.description}
+              </InformationProduct>
+            </ProductInfo>
+
+            <ButtonBuy>
+              <IconButton src={shoppingIcon} alt="button-icon" />
+              <ButtonTitle>COMPRAR</ButtonTitle>
+            </ButtonBuy>
+          </Product>
+        ))}
       </ListProducts>
 
       <AsideCart />

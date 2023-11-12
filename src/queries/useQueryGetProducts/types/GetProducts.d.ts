@@ -13,3 +13,8 @@ export type ResponseGetProducts = {
   products: ProductsProps[];
   count: number;
 };
+
+export type CartProductsProps = {
+  product: ProductsProps;
+  quantity: number;
+};

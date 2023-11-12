@@ -98,7 +98,8 @@ export const ProductCart = styled.div`
 export const ImageProductCart = styled.img`
   mix-blend-mode: multiply;
 
-  width: 100px;
+  width: 80px;
+  height: 80px;
 `;
 
 export const NameProductCart = styled.span`

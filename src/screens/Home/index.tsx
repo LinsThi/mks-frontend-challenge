@@ -20,9 +20,13 @@ import AsideCart from "../../components/AsideCart";
 import { useQueryGetProducts } from "../../queries/useQueryGetProducts";
 import LoadingComponent from "../../components/LoadingComponent";
 import ErrorComponent from "../../components/ErrorComponent";
+import { useAsideCart } from "../../components/AsideCart/store";
 
 function Home() {
   const { isLoading, isError, data: responseProducts } = useQueryGetProducts();
+  const {
+    actions: { handleAddItemInCart },
+  } = useAsideCart();
 
   if (isLoading) return <LoadingComponent />;
 
@@ -51,7 +55,7 @@ function Home() {
               </InformationProduct>
             </ProductInfo>
 
-            <ButtonBuy>
+            <ButtonBuy onClick={() => handleAddItemInCart(currentProduct)}>
               <IconButton src={shoppingIcon} alt="button-icon" />
               <ButtonTitle>COMPRAR</ButtonTitle>
             </ButtonBuy>

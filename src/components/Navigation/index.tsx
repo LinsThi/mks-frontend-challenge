@@ -10,11 +10,17 @@ import {
 
 import cartIcon from "../../assets/cart.svg";
 import { useAsideCart } from "../AsideCart/store";
+import { useMemo } from "react";
 
 function Navigation() {
   const {
+    state: { productsInCart },
     actions: { handleOpenCart },
   } = useAsideCart();
+
+  const quantityItensInCart = useMemo(() => {
+    return productsInCart.length;
+  }, [productsInCart.length]);
 
   return (
     <Container>
@@ -25,7 +31,7 @@ function Navigation() {
 
       <Button onClick={handleOpenCart}>
         <Icon src={cartIcon} alt="cart-icon" size={18} />
-        <QuantityItensInCart>0</QuantityItensInCart>
+        <QuantityItensInCart>{quantityItensInCart}</QuantityItensInCart>
       </Button>
     </Container>
   );

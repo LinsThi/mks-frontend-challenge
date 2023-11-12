@@ -24,11 +24,18 @@ import {
   ValueProductCart,
 } from "./styles";
 import { useAsideCart } from "./store";
+import { removeCentsIfEquals0 } from "../../utils/price";
 
 function AsideCart() {
   const {
-    state: { isOpened },
-    actions: { handleCloseCart },
+    state: { isOpened, productsInCart },
+    actions: {
+      handleCloseCart,
+      handleRemoveItemInCart,
+      handleAddMoreQuantityItem,
+      handleRemoveQuantityItem,
+      getTotalValueForPurchase,
+    },
   } = useAsideCart();
 
   return (
@@ -45,144 +52,49 @@ function AsideCart() {
       </Header>
 
       <ListCartProducts>
-        <ProductCart>
-          <ImageProductCart
-            src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/41-nc-alum-red-sport-band-red-s9?wid=1200&hei=630&fmt=jpeg&qlt=95&.v=1693325468410"
-            alt="image-product"
-          />
+        {productsInCart.map(({ product, quantity }) => (
+          <ProductCart>
+            <ImageProductCart src={product.photo} alt="image-product" />
 
-          <NameProductCart>Apple Watch Series 4 GPS</NameProductCart>
+            <NameProductCart>{product.name}</NameProductCart>
 
-          <QuantityProductInCart>
-            <LabelQuantity>Qtd:</LabelQuantity>
+            <QuantityProductInCart>
+              <LabelQuantity>Qtd:</LabelQuantity>
 
-            <QuantityProduct>
-              <ButtonQuantity>
-                <TextButtonQuantity>-</TextButtonQuantity>
-              </ButtonQuantity>
+              <QuantityProduct>
+                <ButtonQuantity
+                  onClick={() => handleRemoveQuantityItem(product.id)}
+                >
+                  <TextButtonQuantity>-</TextButtonQuantity>
+                </ButtonQuantity>
 
-              <TextQuantity>1</TextQuantity>
+                <TextQuantity>{quantity}</TextQuantity>
 
-              <ButtonQuantity>
-                <TextButtonQuantity>+</TextButtonQuantity>
-              </ButtonQuantity>
-            </QuantityProduct>
-          </QuantityProductInCart>
+                <ButtonQuantity
+                  onClick={() => handleAddMoreQuantityItem(product.id)}
+                >
+                  <TextButtonQuantity>+</TextButtonQuantity>
+                </ButtonQuantity>
+              </QuantityProduct>
+            </QuantityProductInCart>
 
-          <ValueProductCart>R$399</ValueProductCart>
+            <ValueProductCart>
+              R${removeCentsIfEquals0(product.price)}
+            </ValueProductCart>
 
-          <ButtonRemove>
-            <TextButtonRemove>X</TextButtonRemove>
-          </ButtonRemove>
-        </ProductCart>
-
-        <ProductCart>
-          <ImageProductCart
-            src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/41-nc-alum-red-sport-band-red-s9?wid=1200&hei=630&fmt=jpeg&qlt=95&.v=1693325468410"
-            alt="image-product"
-          />
-
-          <NameProductCart>Apple Watch Series 4 GPS</NameProductCart>
-
-          <div>quantity</div>
-
-          <ValueProductCart>R$399</ValueProductCart>
-
-          <ButtonRemove>
-            <TextButtonRemove>X</TextButtonRemove>
-          </ButtonRemove>
-        </ProductCart>
-
-        <ProductCart>
-          <ImageProductCart
-            src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/41-nc-alum-red-sport-band-red-s9?wid=1200&hei=630&fmt=jpeg&qlt=95&.v=1693325468410"
-            alt="image-product"
-          />
-
-          <NameProductCart>Apple Watch Series 4 GPS</NameProductCart>
-
-          <div>quantity</div>
-
-          <ValueProductCart>R$399</ValueProductCart>
-
-          <ButtonRemove>
-            <TextButtonRemove>X</TextButtonRemove>
-          </ButtonRemove>
-        </ProductCart>
-
-        <ProductCart>
-          <ImageProductCart
-            src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/41-nc-alum-red-sport-band-red-s9?wid=1200&hei=630&fmt=jpeg&qlt=95&.v=1693325468410"
-            alt="image-product"
-          />
-
-          <NameProductCart>Apple Watch Series 4 GPS</NameProductCart>
-
-          <div>quantity</div>
-
-          <ValueProductCart>R$399</ValueProductCart>
-
-          <ButtonRemove>
-            <TextButtonRemove>X</TextButtonRemove>
-          </ButtonRemove>
-        </ProductCart>
-
-        <ProductCart>
-          <ImageProductCart
-            src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/41-nc-alum-red-sport-band-red-s9?wid=1200&hei=630&fmt=jpeg&qlt=95&.v=1693325468410"
-            alt="image-product"
-          />
-
-          <NameProductCart>Apple Watch Series 4 GPS</NameProductCart>
-
-          <div>quantity</div>
-
-          <ValueProductCart>R$399</ValueProductCart>
-
-          <ButtonRemove>
-            <TextButtonRemove>X</TextButtonRemove>
-          </ButtonRemove>
-        </ProductCart>
-
-        <ProductCart>
-          <ImageProductCart
-            src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/41-nc-alum-red-sport-band-red-s9?wid=1200&hei=630&fmt=jpeg&qlt=95&.v=1693325468410"
-            alt="image-product"
-          />
-
-          <NameProductCart>Apple Watch Series 4 GPS</NameProductCart>
-
-          <div>quantity</div>
-
-          <ValueProductCart>R$399</ValueProductCart>
-
-          <ButtonRemove>
-            <TextButtonRemove>X</TextButtonRemove>
-          </ButtonRemove>
-        </ProductCart>
-
-        <ProductCart>
-          <ImageProductCart
-            src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/41-nc-alum-red-sport-band-red-s9?wid=1200&hei=630&fmt=jpeg&qlt=95&.v=1693325468410"
-            alt="image-product"
-          />
-
-          <NameProductCart>Apple Watch Series 4 GPS</NameProductCart>
-
-          <div>quantity</div>
-
-          <ValueProductCart>R$399</ValueProductCart>
-
-          <ButtonRemove>
-            <TextButtonRemove>X</TextButtonRemove>
-          </ButtonRemove>
-        </ProductCart>
+            <ButtonRemove onClick={() => handleRemoveItemInCart(product.id)}>
+              <TextButtonRemove>X</TextButtonRemove>
+            </ButtonRemove>
+          </ProductCart>
+        ))}
       </ListCartProducts>
 
       <FooterAside>
         <TotalValueProductsInCart>
           <TextTotal>Total: </TextTotal>
-          <TextTotal>R$ 798 </TextTotal>
+          <TextTotal>
+            R$ {removeCentsIfEquals0(getTotalValueForPurchase())}
+          </TextTotal>
         </TotalValueProductsInCart>
 
         <ButtonFinalizePurchase>

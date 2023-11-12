@@ -6,6 +6,7 @@ import theme from "./theme";
 import Home from "./screens/Home";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
+import Toast from "./components/Toast";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ function App() {
 
         <Footer />
 
+        <Toast />
         <GlobalStyle />
       </ThemeProvider>
     </QueryClientProvider>

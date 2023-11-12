@@ -36,7 +36,7 @@ function Home() {
     <Container>
       <ListProducts>
         {responseProducts?.map((currentProduct) => (
-          <Product>
+          <Product key={currentProduct.id + currentProduct.name}>
             <ImageProduct>
               <Image src={currentProduct.photo} alt="image-product" />
             </ImageProduct>

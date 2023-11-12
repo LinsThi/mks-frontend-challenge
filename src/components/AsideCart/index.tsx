@@ -12,6 +12,7 @@ import {
   ListCartProducts,
   NameProductCart,
   ProductCart,
+  QuantityAndValueProduct,
   QuantityProduct,
   QuantityProductInCart,
   TextButtonFinalizePurchase,
@@ -25,6 +26,8 @@ import {
 } from "./styles";
 import { useAsideCart } from "./store";
 import { removeCentsIfEquals0 } from "../../utils/price";
+import { useToast } from "../Toast/store";
+import { useCallback } from "react";
 
 function AsideCart() {
   const {
@@ -35,11 +38,22 @@ function AsideCart() {
       handleAddMoreQuantityItem,
       handleRemoveQuantityItem,
       getTotalValueForPurchase,
+      buyAllProducts,
     },
   } = useAsideCart();
 
+  const {
+    actions: { addToast },
+  } = useToast();
+
+  const handleFinalizePurchase = useCallback(() => {
+    const { message, status } = buyAllProducts();
+
+    addToast(status === true ? "success" : "error", message);
+  }, [addToast, buyAllProducts]);
+
   return (
-    <Container isOpened={isOpened}>
+    <Container $isOpened={isOpened}>
       <Header>
         <Title>
           Carrinho de <br />
@@ -53,34 +67,36 @@ function AsideCart() {
 
       <ListCartProducts>
         {productsInCart.map(({ product, quantity }) => (
-          <ProductCart>
+          <ProductCart key={product.id + product.name}>
             <ImageProductCart src={product.photo} alt="image-product" />
 
             <NameProductCart>{product.name}</NameProductCart>
 
-            <QuantityProductInCart>
-              <LabelQuantity>Qtd:</LabelQuantity>
+            <QuantityAndValueProduct>
+              <QuantityProductInCart>
+                <LabelQuantity>Qtd:</LabelQuantity>
 
-              <QuantityProduct>
-                <ButtonQuantity
-                  onClick={() => handleRemoveQuantityItem(product.id)}
-                >
-                  <TextButtonQuantity>-</TextButtonQuantity>
-                </ButtonQuantity>
+                <QuantityProduct>
+                  <ButtonQuantity
+                    onClick={() => handleRemoveQuantityItem(product.id)}
+                  >
+                    <TextButtonQuantity>-</TextButtonQuantity>
+                  </ButtonQuantity>
 
-                <TextQuantity>{quantity}</TextQuantity>
+                  <TextQuantity>{quantity}</TextQuantity>
 
-                <ButtonQuantity
-                  onClick={() => handleAddMoreQuantityItem(product.id)}
-                >
-                  <TextButtonQuantity>+</TextButtonQuantity>
-                </ButtonQuantity>
-              </QuantityProduct>
-            </QuantityProductInCart>
+                  <ButtonQuantity
+                    onClick={() => handleAddMoreQuantityItem(product.id)}
+                  >
+                    <TextButtonQuantity>+</TextButtonQuantity>
+                  </ButtonQuantity>
+                </QuantityProduct>
+              </QuantityProductInCart>
 
-            <ValueProductCart>
-              R${removeCentsIfEquals0(product.price)}
-            </ValueProductCart>
+              <ValueProductCart>
+                R${removeCentsIfEquals0(product.price)}
+              </ValueProductCart>
+            </QuantityAndValueProduct>
 
             <ButtonRemove onClick={() => handleRemoveItemInCart(product.id)}>
               <TextButtonRemove>X</TextButtonRemove>
@@ -97,7 +113,7 @@ function AsideCart() {
           </TextTotal>
         </TotalValueProductsInCart>
 
-        <ButtonFinalizePurchase>
+        <ButtonFinalizePurchase onClick={handleFinalizePurchase}>
           <TextButtonFinalizePurchase>
             Finalizar compra
           </TextButtonFinalizePurchase>

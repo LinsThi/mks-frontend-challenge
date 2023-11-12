@@ -4,7 +4,6 @@ import IconSVG from "../../components/IconSVG";
 export const Container = styled.section`
   display: flex;
   flex-direction: column;
-  height: 83vh;
 `;
 
 export const ListProducts = styled.div`
@@ -50,6 +49,10 @@ export const NameProduct = styled.span`
   letter-spacing: 0px;
   display: flex;
   flex: 1;
+
+  @media screen and (max-width: 376px) {
+    padding-right: 20px;
+  }
 `;
 
 export const InformationProduct = styled.span`

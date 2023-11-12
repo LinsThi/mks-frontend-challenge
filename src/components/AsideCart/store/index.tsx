@@ -17,6 +17,10 @@ type ActionProps = {
   handleAddMoreQuantityItem: (itemID: number) => void;
   handleRemoveQuantityItem: (itemID: number) => void;
   getTotalValueForPurchase: () => string;
+  buyAllProducts: () => {
+    message: string;
+    status: boolean;
+  };
   verifyIfItemAlreadyExists: (itemID: number) => {
     indexProduct: number;
     alreadyExistsProduct: boolean;
@@ -50,7 +54,7 @@ export const useAsideCart = create<StoreProps>((set, get) => ({
       );
 
       if (alreadyExistsProduct) {
-        return alert("JÁ EXISTE!");
+        return;
       }
 
       const productCart: CartProductsProps = {
@@ -129,6 +133,25 @@ export const useAsideCart = create<StoreProps>((set, get) => ({
       }
 
       return valueTotal.toString();
+    },
+    buyAllProducts: () => {
+      const currentListProducts = get().state.productsInCart;
+
+      if (currentListProducts.length === 0) {
+        get().actions.handleCloseCart();
+
+        return {
+          message: "O carrinho está vazio!",
+          status: false,
+        };
+      }
+
+      set(() => ({ state: initialState }));
+
+      return {
+        message: "Produtos comprados com sucesso!",
+        status: true,
+      };
     },
     verifyIfItemAlreadyExists: (itemID: number) => {
       const allProducts = get().state.productsInCart;

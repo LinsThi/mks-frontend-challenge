@@ -7,6 +7,10 @@ export const Container = styled.header`
   background-color: #0f52ba;
   padding: 22px 40px;
   width: 100%;
+
+  @media screen and (max-width: 376px) {
+    padding: 22px 20px;
+  }
 `;
 
 export const Logo = styled.label`

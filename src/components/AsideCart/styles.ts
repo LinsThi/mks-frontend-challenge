@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 
 type ContainerProps = {
-  isOpened: boolean;
+  $isOpened: boolean;
 };
 
 const slideIn = keyframes`
@@ -14,18 +14,31 @@ const slideIn = keyframes`
 `;
 
 export const Container = styled.aside<ContainerProps>`
-  position: absolute;
+  position: fixed;
   right: 0;
   top: 0;
   bottom: 0;
+  z-index: 1;
 
   background-color: ${({ theme }) => theme.COLORS.PRIMARY};
 
-  width: 500px;
-
   padding: 50px 30px;
-  display: ${({ isOpened }) => (isOpened ? "inline" : "none")};
+  display: ${({ $isOpened }) => ($isOpened ? "inline" : "none")};
   animation: 0.6s ${slideIn} ease-out;
+
+  width: 470px;
+
+  @media screen and (max-width: 520px) {
+    width: 450px;
+  }
+
+  @media screen and (max-width: 499px) {
+    width: 370px;
+  }
+
+  @media screen and (max-width: 376px) {
+    width: 300px;
+  }
 `;
 
 export const Header = styled.div`
@@ -40,6 +53,10 @@ export const Title = styled.span`
   letter-spacing: 0em;
   text-align: left;
   color: ${({ theme }) => theme.COLORS.MAIN};
+
+  @media screen and (max-width: 520px) {
+    font-size: 20px;
+  }
 `;
 
 export const ButtonClose = styled.button`
@@ -61,13 +78,13 @@ export const CloseIcon = styled.span`
 `;
 
 export const ListCartProducts = styled.section`
-  margin-top: 50px;
+  margin-top: 20px;
 
   display: flex;
   flex-direction: column;
   gap: 10px;
 
-  height: 58vh;
+  height: 63vh;
 
   overflow: auto;
   overflow-x: hidden;
@@ -82,6 +99,11 @@ export const ListCartProducts = styled.section`
     background-color: ${({ theme }) => theme.COLORS.LIGHT_GRAY};
     border-radius: 6px;
   }
+
+  @media screen and (max-width: 1215px) {
+    margin-top: 0;
+    height: 50vh;
+  }
 `;
 
 export const ProductCart = styled.div`
@@ -93,21 +115,35 @@ export const ProductCart = styled.div`
   padding: 10px;
   border-radius: 8px;
   position: relative;
+
+  @media screen and (max-width: 499px) {
+    flex-direction: column;
+  }
 `;
 
 export const ImageProductCart = styled.img`
   mix-blend-mode: multiply;
 
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
+
+  @media screen and (max-width: 520px) {
+    width: 50px;
+    height: 50px;
+  }
 `;
 
 export const NameProductCart = styled.span`
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 17px;
 
-  width: 120px;
+  width: 110px;
+
+  @media screen and (max-width: 520px) {
+    font-size: 14px;
+    width: 100px;
+  }
 `;
 
 export const QuantityProductInCart = styled.div`
@@ -121,6 +157,10 @@ export const LabelQuantity = styled.label`
   font-weight: 400;
   line-height: 6px;
   letter-spacing: 0em;
+
+  @media screen and (max-width: 499px) {
+    display: none;
+  }
 `;
 
 export const QuantityProduct = styled.div`
@@ -163,13 +203,23 @@ export const TextQuantity = styled.span`
   }
 `;
 
+export const QuantityAndValueProduct = styled.div`
+  display: flex;
+  gap: 20px;
+`;
+
 export const ValueProductCart = styled.span`
   font-size: 16px;
   font-weight: 700;
   line-height: 17px;
-  /* margin-top: 2vh; */
 
   color: ${({ theme }) => theme.COLORS.BLACK};
+
+  margin-top: 2vh;
+
+  @media screen and (max-width: 499px) {
+    margin-top: 0;
+  }
 `;
 
 export const ButtonRemove = styled.button`
@@ -184,8 +234,9 @@ export const ButtonRemove = styled.button`
   padding: 5px;
 
   position: absolute;
-  top: -10%;
+  top: -5%;
   right: -2%;
+  z-index: 1;
 `;
 
 export const TextButtonRemove = styled.span`
@@ -216,6 +267,10 @@ export const TotalValueProductsInCart = styled.aside`
 
     color: ${({ theme }) => theme.COLORS.MAIN};
   }
+
+  @media screen and (max-width: 499px) {
+    margin: 33px 10px;
+  }
 `;
 
 export const TextTotal = styled.span`
@@ -226,6 +281,10 @@ export const TextTotal = styled.span`
   text-align: left;
 
   color: ${({ theme }) => theme.COLORS.MAIN};
+
+  @media screen and (max-width: 520px) {
+    font-size: 20px;
+  }
 `;
 
 export const ButtonFinalizePurchase = styled.button`
@@ -239,4 +298,8 @@ export const TextButtonFinalizePurchase = styled.span`
   line-height: 15px;
 
   color: ${({ theme }) => theme.COLORS.MAIN};
+
+  @media screen and (max-width: 520px) {
+    font-size: 20px;
+  }
 `;

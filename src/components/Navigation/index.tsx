@@ -9,12 +9,12 @@ import {
 } from "./styles";
 
 import cartIcon from "../../assets/cart.svg";
-import { useAsideCard } from "../AsideCart/store";
+import { useAsideCart } from "../AsideCart/store";
 
 function Navigation() {
   const {
     actions: { handleOpenCart },
-  } = useAsideCard();
+  } = useAsideCart();
 
   return (
     <Container>

@@ -20,7 +20,7 @@ const initialState: StateProps = {
   productsInCart: [],
 };
 
-export const useAsideCard = create<StoreProps>((set) => ({
+export const useAsideCart = create<StoreProps>((set) => ({
   state: initialState,
   actions: {
     handleOpenCart: () =>

@@ -23,13 +23,13 @@ import {
   TotalValueProductsInCart,
   ValueProductCart,
 } from "./styles";
-import { useAsideCard } from "./store";
+import { useAsideCart } from "./store";
 
 function AsideCart() {
   const {
     state: { isOpened },
     actions: { handleCloseCart },
-  } = useAsideCard();
+  } = useAsideCart();
 
   return (
     <Container isOpened={isOpened}>

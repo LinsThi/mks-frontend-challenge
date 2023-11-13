@@ -14,6 +14,7 @@ const slideIn = keyframes`
 `;
 
 export const Container = styled.aside<ContainerProps>`
+  height: 100vh;
   position: fixed;
   right: 0;
   top: 0;
@@ -102,7 +103,7 @@ export const ListCartProducts = styled.section`
 
   @media screen and (max-width: 1215px) {
     margin-top: 0;
-    height: 50vh;
+    height: 69vh;
   }
 `;
 

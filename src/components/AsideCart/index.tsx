@@ -27,7 +27,7 @@ import {
 import { useAsideCart } from "./store";
 import { removeCentsIfEquals0 } from "../../utils/price";
 import { useToast } from "../Toast/store";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 
 function AsideCart() {
   const {
@@ -51,6 +51,16 @@ function AsideCart() {
 
     addToast(status === true ? "success" : "error", message);
   }, [addToast, buyAllProducts]);
+
+  useEffect(() => {
+    if (isOpened) {
+      document.body.style.overflow = "hidden";
+
+      return () => {
+        document.body.style.overflow = "unset";
+      };
+    }
+  }, [isOpened]);
 
   return (
     <Container $isOpened={isOpened} data-testid="aside-cart-menu">

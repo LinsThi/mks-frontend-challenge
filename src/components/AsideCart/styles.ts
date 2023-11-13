@@ -103,7 +103,7 @@ export const ListCartProducts = styled.section`
 
   @media screen and (max-width: 1215px) {
     margin-top: 0;
-    height: 56vh;
+    height: 61vh;
   }
 `;
 
@@ -219,7 +219,12 @@ export const ValueProductCart = styled.span`
   margin-top: 2vh;
 
   @media screen and (max-width: 499px) {
+    font-size: 14px;
     margin-top: 0;
+    padding: 3px 10px;
+    background-color: ${({ theme }) => theme.COLORS.DARK_GRAY};
+    color: ${({ theme }) => theme.COLORS.MAIN};
+    border-radius: 5px;
   }
 `;
 

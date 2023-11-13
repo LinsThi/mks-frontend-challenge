@@ -103,7 +103,7 @@ export const ListCartProducts = styled.section`
 
   @media screen and (max-width: 1215px) {
     margin-top: 0;
-    height: 69vh;
+    height: 56vh;
   }
 `;
 

@@ -23,15 +23,17 @@ function Navigation() {
   }, [productsInCart.length]);
 
   return (
-    <Container>
+    <Container data-testid="navigation-header">
       <Logo>
         <NameLogo>MKS</NameLogo>
         <SubNameLogo>Sistemas</SubNameLogo>
       </Logo>
 
-      <Button onClick={handleOpenCart}>
+      <Button onClick={handleOpenCart} data-testid="navigation-cart-button">
         <Icon src={cartIcon} alt="cart-icon" size={18} />
-        <QuantityItensInCart>{quantityItensInCart}</QuantityItensInCart>
+        <QuantityItensInCart data-testid="product-quantity-cart">
+          {quantityItensInCart}
+        </QuantityItensInCart>
       </Button>
     </Container>
   );

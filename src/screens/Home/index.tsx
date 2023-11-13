@@ -33,10 +33,13 @@ function Home() {
   if (isError) return <ErrorComponent />;
 
   return (
-    <Container>
+    <Container data-testid="main-content">
       <ListProducts>
         {responseProducts?.map((currentProduct) => (
-          <Product key={currentProduct.id + currentProduct.name}>
+          <Product
+            key={currentProduct.id + currentProduct.name}
+            data-testid="product-component"
+          >
             <ImageProduct>
               <Image src={currentProduct.photo} alt="image-product" />
             </ImageProduct>
@@ -55,7 +58,10 @@ function Home() {
               </InformationProduct>
             </ProductInfo>
 
-            <ButtonBuy onClick={() => handleAddItemInCart(currentProduct)}>
+            <ButtonBuy
+              onClick={() => handleAddItemInCart(currentProduct)}
+              data-testid="button-buy-product"
+            >
               <IconButton src={shoppingIcon} alt="button-icon" />
               <ButtonTitle>COMPRAR</ButtonTitle>
             </ButtonBuy>

@@ -2,7 +2,7 @@ import { Container, FooterText } from "./styles";
 
 function Footer() {
   return (
-    <Container>
+    <Container data-testid="footer">
       <FooterText>MKS sistemas &copy; Todos os direitos reservados</FooterText>
     </Container>
   );

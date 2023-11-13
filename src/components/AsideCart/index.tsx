@@ -53,19 +53,22 @@ function AsideCart() {
   }, [addToast, buyAllProducts]);
 
   return (
-    <Container $isOpened={isOpened}>
+    <Container $isOpened={isOpened} data-testid="aside-cart-menu">
       <Header>
         <Title>
           Carrinho de <br />
           compras
         </Title>
 
-        <ButtonClose onClick={handleCloseCart}>
+        <ButtonClose
+          onClick={handleCloseCart}
+          data-testid="button-close-aside-cart-menu"
+        >
           <CloseIcon>X</CloseIcon>
         </ButtonClose>
       </Header>
 
-      <ListCartProducts>
+      <ListCartProducts data-testid="aside-menu-cart-list">
         {productsInCart.map(({ product, quantity }) => (
           <ProductCart key={product.id + product.name}>
             <ImageProductCart src={product.photo} alt="image-product" />
@@ -98,7 +101,10 @@ function AsideCart() {
               </ValueProductCart>
             </QuantityAndValueProduct>
 
-            <ButtonRemove onClick={() => handleRemoveItemInCart(product.id)}>
+            <ButtonRemove
+              onClick={() => handleRemoveItemInCart(product.id)}
+              data-testid="product-button-remove"
+            >
               <TextButtonRemove>X</TextButtonRemove>
             </ButtonRemove>
           </ProductCart>
